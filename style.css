@@ -507,6 +507,26 @@ footer {
     flex-grow: 1;
 }
 
+/* Styles pour la vidéo responsive */
+.responsive-video {
+    width: 100%;
+    max-width: 800px;
+    height: auto;
+    border: none;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(44, 62, 80, 0.1);
+    margin: 0 auto;
+    display: block;
+}
+
+/* Adaptation pour mobile */
+@media (max-width: 768px) {
+    .responsive-video {
+        max-width: 100%;
+        height: auto;
+    }
+}
+
 /* Legal section styles */
 .legal-section {
     max-width: 900px;
