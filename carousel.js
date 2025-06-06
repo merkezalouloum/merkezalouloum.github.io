@@ -62,7 +62,11 @@ document.addEventListener('DOMContentLoaded', function() {
     // Démarrer le carrousel
     console.log("Démarrage initial du carrousel");
     moveToIndex(0);
-    startInterval();
+    // Démarrer immédiatement le premier défilement après un court délai
+    setTimeout(() => {
+        nextSlide();
+        startInterval();
+    }, 1000);
 
     // Pause au survol
     carousel.addEventListener('mouseenter', () => {
