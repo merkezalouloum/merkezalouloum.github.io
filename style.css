@@ -587,3 +587,128 @@ footer {
     }
 }
 
+
+/* Styles pour la pop-up fullscreen avec cookies intégrés */
+/* Styles pour la pop-up fullscreen avec cookies intégrés */
+#persistent-popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(44, 62, 80, 0.95);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
+
+/* Pas de blocage des événements sur la popup elle-même */
+#persistent-popup * {
+    pointer-events: auto;
+}
+
+.cookie-consent {
+    margin: 20px 0;
+    padding: 15px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+}
+
+.cookie-consent p {
+    margin-bottom: 15px;
+    font-size: 1rem;
+}
+
+.cookie-buttons {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.cookie-buttons button {
+    padding: 8px 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    flex: 1;
+}
+
+#accept-cookies-btn {
+    background: #4CAF50;
+    color: white;
+}
+
+#reject-cookies-btn {
+    background: #f44336;
+    color: white;
+}
+
+.cookie-consent a {
+    color: #5dade2;
+    font-size: 0.9rem;
+    text-decoration: none;
+}
+
+.cookie-consent a:hover {
+    text-decoration: underline;
+}
+
+#persistent-popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(44, 62, 80, 0.95);
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    display: none;
+}
+
+#persistent-popup .popup-content {
+    max-width: 600px;
+    padding: 40px;
+    background: #2c3e50;
+    border-radius: 8px;
+    text-align: center;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+}
+
+#persistent-popup h3 {
+    margin: 0 0 20px;
+    font-size: 1.8rem;
+}
+
+#persistent-popup p {
+    margin: 0 0 30px;
+    font-size: 1.2rem;
+}
+
+#popup-close-btn {
+    padding: 12px 24px;
+    background: #3498db;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background 0.3s;
+}
+
+#popup-close-btn:hover {
+    background: #2980b9;
+}
+
+/* Empêche l'interaction avec le reste de la page */
+body.popup-active {
+    overflow: hidden;
+    pointer-events: none;
+}
+
+body.popup-active #persistent-popup {
+    pointer-events: auto;
+}
