@@ -1,62 +1,125 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Accueil - Merkez Al 'Ouloum</title>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Accueil - Merkez Al 'Ouloum</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <header>
-        <div class="logo-and-title">
-            <a href="index.html" class="logo">
-                <img src="LogoMerkez.png" alt="LogoMerkez">
-            </a>
-            <nav>
-                <a href="presentation.html">Présentation</a>
-                <a href="programme.html">Programme</a>
-                <a href="inscription.html">Inscription</a>
-                <a href="avis.html">Avis</a>
-                <a href="contact.html">Contact</a>
-            </nav>
-        </div>
-    </header>
+  <header>
+    <div class="logo-and-title">
+      <a href="index.html" class="logo">
+        <img src="LogoMerkez.png" alt="LogoMerkez">
+      </a>
+      <nav>
+        <a href="presentation.html">Présentation</a>
+        <a href="programme.html">Programme</a>
+        <a href="inscription.html">Inscription</a>
+        <a href="avis.html">Avis</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+    </div>
+  </header>
 
-    <main>
-        <section class="hero">
-            <h1>Bienvenue au Merkez Al 'Ouloum</h1>
-            <p>Découvrez notre institut d'apprentissage de la langue arabe avec des cours en ligne structurés pour tous les niveaux.</p>
-            <br>
-            <p>Rejoignez-nous pour apprendre l'arabe de manière progressive avec des enseignants expérimentés.</p>
-        </section>
+  <main>
+    <section class="hero">
+      <h1>Bienvenue au Merkez Al 'Ouloum</h1>
+      <p>Découvrez notre institut d'apprentissage de la langue arabe avec des cours en ligne structurés pour tous les niveaux.</p>
+      <br>
+      <p>Rejoignez-nous pour apprendre l'arabe de manière progressive avec des enseignants expérimentés.</p>
+    </section>
 
+    <section class="button-section">
+      <div class="button-container">
+        <a href="presentation.html" class="cta-button left-button">Qui sommes-nous ?</a>
+        <a href="inscription.html" class="cta-button right-button">Comment s'inscrire ?</a>
+      </div>
+    </section>
 
-        <section class="button-section">
-            <div class="button-container">
-                <a href="presentation.html" class="cta-button left-button">Qui sommes-nous ?</a>
-                <a href="inscription.html" class="cta-button right-button">Comment s'inscrire ?</a>
-            </div>
-        </section>
+    <section class="video-presentation">
+      <h2>Extrait vidéo d'un cours</h2>
+      <video class="responsive-video" controls>
+        <source src="videopresentation.mp4" type="video/mp4">
+        Votre navigateur ne supporte pas la balise vidéo.
+      </video>
+    </section>
+  </main>
 
-        <section class="video-presentation">
-            <h2>Extrait vidéo d'un cours</h2>
-            <video class="responsive-video" controls>
-                <source src="videopresentation.mp4" type="video/mp4">
-                Votre navigateur ne supporte pas la balise vidéo.
-            </video>
-        </section>
+  <footer>
+    <p>&copy; 2025 Merkez Al 'Ouloum | Tous droits réservés</p>
+    <div class="footer-links">
+      <a href="politique_confidentialite.html">Politique de confidentialité</a>
+      <a href="cgu.html">Conditions d'utilisation</a>
+      <a href="mentions-legales.html">Mentions Légales</a>
+    </div>
+  </footer>
 
+  <!-- Bandeau cookies conforme CNIL -->
+  <div id="cookie-banner" style="position: fixed; bottom: 0; width: 100%; background: #1e88e5; color: white; padding: 1em; text-align: center; z-index: 1000;">
+    <p>Nous utilisons des cookies pour améliorer votre expérience. En cliquant sur "Accepter", vous consentez à leur utilisation. <a href="politique_confidentialite.html#cookies" style="color: white; text-decoration: underline;">En savoir plus</a></p>
+    <div style="margin-top: 1em;">
+      <button onclick="acceptCookies()" style="margin: 0 0.5em; padding: 0.5em 1em; background: #0d47a1; color: white; border: none; border-radius: 4px;">Accepter</button>
+      <button onclick="rejectCookies()" style="margin: 0 0.5em; padding: 0.5em 1em; background: #0d47a1; color: white; border: none; border-radius: 4px;">Refuser</button>
+    </div>
+  </div>
 
-    </main>
+  <!-- Script de gestion du consentement conforme CNIL -->
+  <script>
+    function setCookie(name, value, days) {
+      const date = new Date();
+      date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+      document.cookie = `${name}=${value};expires=${date.toUTCString()};path=/`;
+    }
 
-    <footer>
-        <p>&copy; 2025 Merkez Al 'Ouloum | Tous droits réservés</p>
-        <div class="footer-links">
-            <a href="politique_confidentialite.html">Politique de confidentialité</a>
-            <a href="cgu.html">Conditions d'utilisation</a>
-            <a href="mentions-legales.html">Mentions Légales</a>
-        </div>
-    </footer>
+    function getCookie(name) {
+      const value = `; ${document.cookie}`;
+      const parts = value.split(`; ${name}=`);
+      if (parts.length === 2) return parts.pop().split(';').shift();
+    }
+
+    function acceptCookies() {
+      document.getElementById('cookie-banner').style.display = 'none';
+      setCookie('cookiesAccepted', 'true', 365);
+      setCookie('cookiesRejected', 'false', 365);
+      loadGoogleAnalytics();
+    }
+
+    function rejectCookies() {
+      document.getElementById('cookie-banner').style.display = 'none';
+      setCookie('cookiesAccepted', 'false', 365);
+      setCookie('cookiesRejected', 'true', 365);
+    }
+
+    function loadGoogleAnalytics() {
+      const script = document.createElement('script');
+      script.setAttribute('async', '');
+      script.src = 'https://www.googletagmanager.com/gtag/js?id=G-WV9Z95B1XF';
+      document.head.appendChild(script);
+
+      script.onload = function () {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-WV9Z95B1XF');
+      };
+    }
+
+    // Afficher le bandeau sauf si choix déjà fait
+    const accepted = getCookie('cookiesAccepted') === 'true';
+    const rejected = getCookie('cookiesRejected') === 'true';
+
+    if (!accepted && !rejected) {
+      document.getElementById('cookie-banner').style.display = 'block';
+    } else {
+      document.getElementById('cookie-banner').style.display = 'none';
+    }
+
+    if (accepted && !rejected) {
+      loadGoogleAnalytics();
+      document.getElementById('cookie-banner').style.display = 'none';
+    }
+  </script>
 </body>
 </html>
