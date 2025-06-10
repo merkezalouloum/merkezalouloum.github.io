@@ -101,13 +101,24 @@ main {
     color: #2c3e50;
 }
 
-.video-presentation iframe {
+.video-presentation iframe,
+.video-presentation video {
     width: 100%;
     max-width: 800px;
-    height: 450px;
+    height: auto;
+    aspect-ratio: 16/9;
     border: none;
     border-radius: 8px;
     box-shadow: 0 4px 12px rgba(44, 62, 80, 0.1);
+    display: block;
+    margin: 0 auto;
+}
+
+@media (max-width: 768px) {
+    .video-presentation iframe,
+    .video-presentation video {
+        max-width: 100%;
+    }
 }
 
 /* Footer styles */
@@ -638,9 +649,7 @@ footer {
     color: white;
 }
 
-#reject-cookies-btn:hover {
-    background-color: #c0392b;
-}
+#reject-cookies-btn {
     transition: all 0.3s ease;
     text-decoration: none;
     white-space: nowrap;
@@ -648,6 +657,10 @@ footer {
     text-overflow: ellipsis;
     max-width: 60%;
     flex-grow: 1;
+}
+
+#reject-cookies-btn:hover {
+    background-color: #c0392b;
 }
 
 /* Styles pour la vidéo responsive */
