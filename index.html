@@ -6,8 +6,9 @@
   <title>Accueil - Merkez Al 'Ouloum</title>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
+  <script src="popup.js"></script>
 </head>
-<body>
+<body onload="managePopup()">
   <header>
     <div class="logo-and-title">
       <a href="index.html" class="logo">
@@ -48,6 +49,11 @@
   </main>
 
   <footer>
+    <!-- Bouton de test pour réinitialiser les cookies -->
+    <button onclick="localStorage.clear(); location.reload();"
+            style="position: fixed; bottom: 10px; right: 10px; padding: 5px;">
+      Réinitialiser cookies
+    </button>
     <p>&copy; 2025 Merkez Al 'Ouloum | Tous droits réservés</p>
     <div class="footer-links">
       <a href="politique_confidentialite.html">Politique de confidentialité</a>

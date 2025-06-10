@@ -1,32 +1,22 @@
-// Vérifier si on est sur la page politique de confidentialité
-function isPrivacyPolicyPage() {
-    return window.location.pathname.includes('politique_confidentialite');
-}
-
-// Fonctions de gestion des cookies
 function setCookie(name, value, days) {
     const date = new Date();
     date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
-    document.cookie = `${name}=${value};expires=${date.toUTCString()};path=/`;
+    const expires = "expires=" + date.toUTCString();
+    document.cookie = name + "=" + value + ";" + expires + ";path=/";
 }
 
-function getCookie(name) {
-    const value = `; ${document.cookie}`;
-    const parts = value.split(`; ${name}=`);
-    if (parts.length === 2) return parts.pop().split(';').shift();
+function isPrivacyPolicyPage() {
+    return window.location.pathname.includes('politique_confidentialite.html');
 }
 
-// Fonction pour afficher/masquer la pop-up fullscreen avec cookies intégrés
 function managePopup() {
     // Ne pas afficher sur la page politique de confidentialité
     if (isPrivacyPolicyPage()) return;
-    
-    // Vérifier si la réponse a été reçue et l'acceptation des cookies
+
+    // Vérifier si la réponse a été reçue
     const responseReceived = localStorage.getItem('popupResponseReceived') === 'true';
-    const cookiesAccepted = getCookie('cookiesAccepted') === 'true';
-    const cookiesRejected = getCookie('cookiesRejected') === 'true';
-    
-    if (!responseReceived || (!cookiesAccepted && !cookiesRejected)) {
+
+    if (!responseReceived) {
         // Créer la pop-up si elle n'existe pas
         if (!document.getElementById('persistent-popup')) {
             const popup = document.createElement('div');
@@ -51,37 +41,43 @@ function managePopup() {
 
             // Gérer les boutons cookies
             document.getElementById('accept-cookies-btn').addEventListener('click', () => {
+                console.log('Accept cookies clicked');
                 setCookie('cookiesAccepted', 'true', 365);
                 setCookie('cookiesRejected', 'false', 365);
-                // Charger Google Analytics si nécessaire
+                localStorage.setItem('popupResponseReceived', 'true');
                 if (typeof loadGoogleAnalytics === 'function') {
                     loadGoogleAnalytics();
                 }
-                // Fermer la popup
                 closePopup();
+                console.log('Cookies accepted and popup closed');
             });
-            
+
             document.getElementById('reject-cookies-btn').addEventListener('click', () => {
+                console.log('Reject cookies clicked');
                 setCookie('cookiesAccepted', 'false', 365);
                 setCookie('cookiesRejected', 'true', 365);
-                // Fermer la popup
+                localStorage.setItem('popupResponseReceived', 'true');
                 closePopup();
+                console.log('Cookies rejected and popup closed');
             });
         }
-        
-        // Afficher la pop-up immédiatement
-        document.getElementById('persistent-popup').style.display = 'flex';
+
+        // Afficher la pop-up après un léger délai
+        setTimeout(() => {
+            document.getElementById('persistent-popup').style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+        }, 1000);
     } else {
         // Masquer la pop-up si la réponse a été reçue
         const popup = document.getElementById('persistent-popup');
         if (popup) {
             popup.style.display = 'none';
-            document.body.classList.remove('popup-active');
+            document.body.style.overflow = '';
         }
     }
 }
 
-// Fonction pour fermer la popup et rétablir le scroll
+// Fonction pour fermer la popup
 function closePopup() {
     const popup = document.getElementById('persistent-popup');
     if (popup) {
@@ -89,15 +85,3 @@ function closePopup() {
         document.body.style.overflow = '';
     }
 }
-
-// Fonction pour marquer la réponse comme reçue (à appeler quand la réponse est soumise)
-function setResponseReceived() {
-    localStorage.setItem('popupResponseReceived', 'true');
-    managePopup(); // Mettre à jour l'affichage
-}
-
-// Initialiser la pop-up quand le DOM est chargé
-document.addEventListener('DOMContentLoaded', managePopup);
-
-// Exposer la fonction pour pouvoir l'appeler depuis d'autres scripts
-window.setResponseReceived = setResponseReceived;
