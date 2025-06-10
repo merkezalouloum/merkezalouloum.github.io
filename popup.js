@@ -5,8 +5,22 @@ function setCookie(name, value, days) {
     document.cookie = name + "=" + value + ";" + expires + ";path=/";
 }
 
+function loadGoogleAnalytics() {
+    // Script Google Analytics
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XXXXXXXXXX'); // À remplacer par votre ID Google Analytics
+    
+    const script = document.createElement('script');
+    script.async = true;
+    script.src = 'https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX';
+    document.head.appendChild(script);
+}
+
 function isPrivacyPolicyPage() {
-    return window.location.pathname.includes('politique_confidentialite.html');
+    return window.location.pathname.includes('politique_confidentialite.html') ||
+           window.location.pathname.includes('cgu.html');
 }
 
 function managePopup() {
@@ -14,9 +28,11 @@ function managePopup() {
     if (isPrivacyPolicyPage()) return;
 
     // Vérifier si la réponse a été reçue
-    const responseReceived = localStorage.getItem('popupResponseReceived') === 'true';
+    const cookieResponse = localStorage.getItem('cookieConsent');
+    console.log('Cookie consent status:', cookieResponse);
+    if (cookieResponse) return; // Ne pas afficher si réponse déjà donnée
 
-    if (!responseReceived) {
+    if (!cookieResponse) {
         // Créer la pop-up si elle n'existe pas
         if (!document.getElementById('persistent-popup')) {
             const popup = document.createElement('div');
@@ -44,7 +60,7 @@ function managePopup() {
                 console.log('Accept cookies clicked');
                 setCookie('cookiesAccepted', 'true', 365);
                 setCookie('cookiesRejected', 'false', 365);
-                localStorage.setItem('popupResponseReceived', 'true');
+                localStorage.setItem('cookieConsent', 'accepted');
                 if (typeof loadGoogleAnalytics === 'function') {
                     loadGoogleAnalytics();
                 }
@@ -56,7 +72,7 @@ function managePopup() {
                 console.log('Reject cookies clicked');
                 setCookie('cookiesAccepted', 'false', 365);
                 setCookie('cookiesRejected', 'true', 365);
-                localStorage.setItem('popupResponseReceived', 'true');
+                localStorage.setItem('cookieConsent', 'rejected');
                 closePopup();
                 console.log('Cookies rejected and popup closed');
             });

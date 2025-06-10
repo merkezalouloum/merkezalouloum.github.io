@@ -6,7 +6,24 @@
   <title>Accueil - Merkez Al 'Ouloum</title>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
-  <script src="popup.js"></script>
+  <!-- Google Analytics (chargé conditionnellement après consentement) -->
+  <script>
+    // Vérifier si le consentement a déjà été donné
+    if (localStorage.getItem('cookieConsent') === 'accepted') {
+      function loadGoogleAnalytics() {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-XXXXXXXXXX'); // À remplacer par votre ID Google Analytics
+        
+        const script = document.createElement('script');
+        script.async = true;
+        script.src = 'https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX';
+        document.head.appendChild(script);
+      }
+      loadGoogleAnalytics();
+    }
+  </script>
 </head>
 <body onload="managePopup()">
   <header>
@@ -63,5 +80,11 @@
   </footer>
 
   <script src="popup.js"></script>
+  <script>
+    // Initialiser le popup après chargement complet
+    document.addEventListener('DOMContentLoaded', function() {
+      managePopup();
+    });
+  </script>
 </body>
 </html>
