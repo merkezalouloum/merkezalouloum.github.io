@@ -78,10 +78,9 @@ function managePopup() {
         });
     }
 
-    window.__cookiePopupTimeout = setTimeout(() => {
-        popup.style.display = 'flex';
-        document.body.classList.add('popup-active');
-    }, 500);
+    popup.style.display = 'flex';
+    document.body.style.overflow = 'hidden';
+    document.body.classList.add('popup-active');
 }
 
 function closePopup() {
@@ -89,14 +88,6 @@ function closePopup() {
     if (popup) {
         popup.style.display = 'none';
     }
+    document.body.style.overflow = '';
     document.body.classList.remove('popup-active');
-}
-
-// Fonction pour fermer la popup
-function closePopup() {
-    const popup = document.getElementById('persistent-popup');
-    if (popup) {
-        popup.style.display = 'none';
-        document.body.style.overflow = '';
-    }
 }
