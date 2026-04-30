@@ -1,15 +1,17 @@
 ﻿:root {
-    --bg: #f5f7fb;
-    --surface: rgba(255, 255, 255, 0.95);
+    --bg: #eaf2ff;
+    --surface: rgba(255, 255, 255, 0.96);
     --surface-strong: #ffffff;
-    --text: #111827;
-    --muted: #6b7280;
-    --accent: #0a84ff;
-    --accent-dark: #0455c8;
-    --accent-soft: #e4f0ff;
-    --border: rgba(15, 23, 42, 0.08);
-    --shadow: 0 25px 60px rgba(15, 23, 42, 0.08);
-    --radius: 24px;
+    --text: #0f172a;
+    --text-inverse: #ffffff;
+    --muted: #5b6d8e;
+    --accent: #2f6ce6;
+    --accent-dark: #1649c3;
+    --accent-soft: rgba(47, 108, 230, 0.15);
+    --border: rgba(15, 23, 42, 0.1);
+    --shadow: 0 28px 80px rgba(15, 23, 42, 0.12);
+    --radius: 28px;
+    --header-bg: #0f3c7d;
 }
 
 * {
@@ -25,10 +27,51 @@ html {
 body {
     font-family: 'Montserrat', sans-serif;
     color: var(--text);
-    background: radial-gradient(circle at top, rgba(10, 132, 255, 0.08), transparent 28%),
-                linear-gradient(180deg, #f8fbff 0%, #f5f7fb 35%, #eef2f7 100%);
+    background: radial-gradient(circle at top, rgba(47, 108, 230, 0.16), transparent 24%),
+                linear-gradient(180deg, #eff5ff 0%, #eaf2ff 35%, #f8fbff 100%);
     min-height: 100vh;
-    line-height: 1.7;
+    line-height: 1.75;
+}
+
+p {
+    margin-bottom: 1.4rem;
+}
+
+.hero,
+.video-presentation,
+.contact-card,
+.legal-section {
+    text-align: center;
+}
+
+.legal-section h1,
+.legal-article h2,
+.contact-card h2 {
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.legal-article,
+.contact-card,
+.video-presentation,
+footer {
+    text-align: center;
+}
+
+.legal-article p,
+.legal-article li,
+.contact-card p {
+    margin: 0 auto 1.3rem;
+    max-width: 760px;
+}
+
+.legal-article li {
+    list-style-position: inside;
+}
+
+.contact-list li {
+    margin-bottom: 0.85rem;
 }
 
 img {
@@ -57,13 +100,14 @@ button {
 }
 
 header {
-    padding: 24px 0;
+    padding: 22px 24px;
     position: sticky;
     top: 0;
     z-index: 20;
-    backdrop-filter: blur(16px);
-    background: rgba(245, 247, 251, 0.86);
-    border-bottom: 1px solid rgba(15, 23, 42, 0.06);
+    backdrop-filter: blur(18px);
+    background: linear-gradient(180deg, #10325f, #0b274d);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.16);
+    box-shadow: 0 18px 40px rgba(0, 0, 0, 0.18);
 }
 
 .logo-and-title {
@@ -71,6 +115,16 @@ header {
     align-items: center;
     justify-content: space-between;
     gap: 24px;
+    width: min(1200px, calc(100% - 48px));
+    margin: 0 auto;
+}
+
+.main-heading,
+main > h1,
+.legal-section h1 {
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .logo img {
@@ -87,7 +141,7 @@ nav {
 }
 
 nav a {
-    color: var(--text);
+    color: var(--text-inverse);
     text-decoration: none;
     font-weight: 600;
     letter-spacing: 0.02em;
@@ -95,25 +149,96 @@ nav a {
 }
 
 nav a:hover {
-    color: var(--accent);
+    color: #dbe9ff;
     transform: translateY(-1px);
 }
 
 main {
-    padding: 48px 0 80px;
+    width: min(1200px, 100%);
+    margin: 0 auto;
+    padding: 48px 24px 80px;
+}
+
+main.presentation-page h2,
+main.presentation-page p {
+    text-align: center;
+    max-width: 860px;
+    margin: 0 auto 1.4rem;
+}
+
+main.presentation-page h2 {
+    margin-top: 32px;
+}
+
+main.presentation-page p:last-of-type {
+    margin-bottom: 0;
+}
+
+main.programme-page h2 {
+    text-align: center;
+    max-width: 860px;
+    margin: 0 auto 1.4rem;
+}
+
+main.programme-page .etage .option {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 24px;
+    width: 100%;
+    overflow: hidden;
+}
+
+main.programme-page .etage .option p {
+    max-width: 760px;
+    margin: 0.9rem auto 0;
+}
+
+main.programme-page .etage .option img {
+    margin-bottom: 18px;
+    border-radius: 24px;
+}
+
+main.programme-page .etage .option .livre-titre,
+main.programme-page .etage .option .tarif-titre {
+    display: block;
+    text-align: center;
+}
+
+main.programme-page .etage-tarifs .frais-inscription,
+main.programme-page .inscription-btn-container {
+    text-align: center;
 }
 
 .hero {
-    padding: 72px 0 56px;
+    padding: 80px 0 64px;
     text-align: center;
     position: relative;
+    overflow: hidden;
+    width: min(1200px, 100%);
+    margin: 0 auto;
 }
 
 .hero::before {
     content: '';
     position: absolute;
     inset: 0;
-    background: radial-gradient(circle at 50% 30%, rgba(10, 132, 255, 0.16), transparent 32%);
+    background: radial-gradient(circle at 50% 28%, rgba(47, 108, 230, 0.2), transparent 35%);
+    pointer-events: none;
+}
+
+.hero::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 10%;
+    width: 280px;
+    height: 280px;
+    transform: translateX(-50%);
+    background: rgba(47, 108, 230, 0.12);
+    border-radius: 50%;
+    filter: blur(36px);
     pointer-events: none;
 }
 
@@ -155,7 +280,7 @@ main {
     align-items: center;
     justify-content: center;
     min-width: 180px;
-    padding: 16px 30px;
+    padding: 16px 32px;
     border-radius: 999px;
     border: 1px solid transparent;
     background: linear-gradient(135deg, var(--accent), var(--accent-dark));
@@ -166,17 +291,18 @@ main {
 }
 
 .cta-button:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 18px 40px rgba(10, 132, 255, 0.18);
+    transform: translateY(-3px);
+    box-shadow: 0 22px 48px rgba(47, 108, 230, 0.22);
 }
 
 .cta-button.secondary {
-    background: rgba(15, 23, 42, 0.06);
-    color: #111827;
+    background: rgba(255, 255, 255, 0.96);
+    color: var(--text);
+    border-color: rgba(15, 23, 42, 0.08);
 }
 
 .cta-button.secondary:hover {
-    background: rgba(15, 23, 42, 0.12);
+    background: rgba(255, 255, 255, 1);
 }
 
 .video-presentation {
@@ -207,11 +333,13 @@ footer {
     padding: 36px 0 24px;
     margin-top: 40px;
     background: transparent;
+    text-align: center;
 }
 
 footer p {
     color: var(--muted);
-    margin-bottom: 14px;
+    margin: 0 auto 14px;
+    max-width: 760px;
 }
 
 .footer-links {
@@ -244,6 +372,7 @@ footer p {
 
 .carousel-inner {
     display: flex;
+    flex-wrap: nowrap;
     transition: transform 0.5s ease;
     width: 100%;
     min-height: 340px;
@@ -456,11 +585,15 @@ footer p {
     max-width: 960px;
     margin: 0 auto;
     padding: 36px 20px 80px;
+    background: rgba(255, 255, 255, 0.88);
+    border-radius: 32px;
+    border: 1px solid rgba(15, 23, 42, 0.08);
+    box-shadow: 0 28px 80px rgba(15, 23, 42, 0.08);
 }
 
 .legal-section h1 {
     font-size: clamp(2rem, 2.5vw, 2.6rem);
-    margin-bottom: 12px;
+    margin-bottom: 14px;
 }
 
 .last-update {

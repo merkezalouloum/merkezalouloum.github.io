@@ -26,7 +26,8 @@ document.addEventListener('DOMContentLoaded', function() {
         if (index >= items.length) index = 0;
         if (index < 0) index = items.length - 1;
         currentIndex = index;
-        carousel.style.transform = `translateX(-${currentIndex * 100}%)`;
+        const slideWidth = items[0].getBoundingClientRect().width;
+        carousel.style.transform = `translateX(-${currentIndex * slideWidth}px)`;
     }
 
     function nextSlide() {
