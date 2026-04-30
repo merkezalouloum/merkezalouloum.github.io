@@ -883,3 +883,9 @@ body.popup-active #persistent-popup {
         font-size: 0.95em;
     }
 }
+
+@media (orientation: landscape) {
+    .cookie-buttons {
+        display: flex !important;
+    }
+}
